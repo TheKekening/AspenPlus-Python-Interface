@@ -112,14 +112,14 @@ class Simulation():
         """
         self.BLK.Elements.Remove(Blockname)
         
-    def BlockPlace(self, Blockname:str, EquipmentType: Literal["RCSTR", "RPlug", "DSTWU", "Flash2", "Mixer", "Heater", "Radfrac", "Splitter", "RYield"])-> None:
+    def BlockPlace(self, Blockname:str, EquipmentType: Literal["RCSTR", "RPlug", "DSTWU", "Flash2", "Mixer", "Heater", "Radfrac", "Splitter", "RYield", "RGibbs"])-> None:
         """Adds only a BLOCK with given Name on the Aspen Simulation Sheet.
             
             No data (Input+Outputs+Simulationdata+InitialValues) are added yet. The Block is "empty".
             
             Args:
                 Blockname: which contains the Name of the Stream in Aspen
-                EquipmentType: Name of Equipment in Aspen. Can be: "RCSTR", "RPlug", "DSTWU", "Flash2", "Mixer", "Heater", "Radfrac", "Splitter", "RYield", 
+                EquipmentType: Name of Equipment in Aspen. Can be: "RCSTR", "RPlug", "DSTWU", "Flash2", "Mixer", "Heater", "Radfrac", "Splitter", "RYield", "RGibbs"
         """
         compositstring = Blockname + "!" + EquipmentType
         print(compositstring)
@@ -1643,6 +1643,14 @@ class Simulation():
         self.BLK.Elements(Blockname).Elements("Input").Elements("TSR_CONFIG").Value = Dictionary.get("ReboilerConfiguration")
     
 
+##RGIBBS
+#PAGE 1 Config
+
+    def BLK_RGIBBS_Set_Pressure(self, Blockname, Pressure):
+        #print(self.BLK.Elements(Blockname).Elements("Input"))
+        self.BLK.Elements(Blockname).Elements("Input").Elements("PRES").Value = Pressure
+    def BLK_RGIBBS_Set_Temperature(self, Blockname,Temperature):
+        self.BLK.Elements(Blockname).Elements("Input").Elements("TEMP").Value = Temperature
 
 ##RADFRAC
 
